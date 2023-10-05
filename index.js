@@ -6,6 +6,17 @@
  */
 function customSet(arr) {
   // Створення множини з масиву за допомогою конструктора Set
+  let set1 = new Set(arr);
+  let mySet1 = new Set();
+  for (const value of set1) {
+    if (typeof value === "number") {
+      set1.delete(value);
+    } else if (typeof value === "string") {
+      mySet1.add(value);
+      console.log(mySet1);
+    }
+    return mySet1;
+  }
   // Перебираємо множину за допомогою 'for of'. Цикл 'for of' дозволяє пройтись по всіх елементах колекції.
   // Для кожного елемента перевіряємо, чи є цей елемент числом за допомогою оператора typeof
   // Якщо елемент є числом, то видаляємо його з множини за допомогою метода delete
@@ -22,6 +33,9 @@ console.log(customSet([1, "a", 2, "b", 3, "c"]));
  * set - Множина, яку потрібно очистити.
  */
 function clearSet(set) {
+  set.clear();
+  console.log(set.size);
+  return "Множину очищено";
   // Використання властивості size для перевірки розміру множини, чи більше вона нуля
   // Якщо так використання методу clear для очищення множини та повертаємо Множину очищено.
   // Якщо ні повертаємо Множина вже порожня.
@@ -42,6 +56,10 @@ console.log(clearSet(new Set([1, 2, 3])));
  * Повертаємо - Оновлену множину з новими елементами.
  */
 function addElements(mySet, arr) {
+  for (let i = 0; i < arr.length; i++) {
+    mySet.add(arr[i]);
+  }
+  return mySet;
   // Перебираємо масив та додаємо кожний елемент до множини за допомогою методу add
   // Метод add додає елемент до множини лише якщо він ще не присутній у множині
   // Повертаємо оновлену множину
@@ -64,6 +82,15 @@ console.log(addElements(new Set(["a", "b", "c"]), ["d", "e", "f"]));
  */
 function filterAndAdd(mySet, arr) {
   // Перебираємо множину за допомогою 'for of'. Всередині циклу перевіряємо, чи є поточний елемент числом.
+  for (const value of mySet) {
+    if(typeof value === "number") {
+      mySet.delete(value);
+    }
+  }
+  for (let i = 0; i < arr.length; i++) {
+    mySet.add(arr[i]);
+  }
+  return mySet;
   // Якщо елемент є числом, видаляємо його з множини за допомогою методу delete.
   // Тепер множина не містить числових значень. Перебираємо масив та додаємо кожний елемент до множини
   // за допомогою методу add. Метод add додає елемент до множини лише якщо він ще не присутній у множині.
@@ -87,6 +114,11 @@ console.log(filterAndAdd(new Set([1, 2, 3, "a", "b", "c"]), ["d", "e", "f"]));
  */
 function checkValueAndType(mySet, value) {
   // Використовуємо метод has для перевірки, чи містить множина певне значення.
+    if(mySet.has(value) === true) {
+      return `Множина має значення "${value}" типу "${typeof value}"`;
+    } else {
+      return `Множина не має значення ${value}`;
+    }
   // Якщо значення знайдено, повертаємо рядок Множина має значення "${value}" типу "${typeof value}".
   // Якщо значення не знайдено, повертаємо рядок Множина не має значення "${value}".
 }
@@ -107,6 +139,10 @@ console.log(checkValueAndType(new Set([1, 2, 3, "a", "b", "c"]), "b"));
  */
 function setToArray(mySet) {
   // Конвертуємо множину в масив за допомогою деструктурізації.
+  let arr = Array.from(mySet);
+  const arrFil = arr.filter((value) => typeof value === "string");
+  const arr1 = arrFil.sort();
+  return arr1;
   // Використовуємо метод filter для створення нового масиву, що містить лише рядкові елементи.
   // Використовуємо метод sort для сортування рядкових елементів в алфавітному порядку.
   // Повертаємо оброблений масив.
