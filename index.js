@@ -11,12 +11,12 @@ function customSet(arr) {
   for (const value of set1) {
     if (typeof value === "number") {
       set1.delete(value);
-    } else if (typeof value === "string") {
+    } 
+    if (typeof value === "string") {
       mySet1.add(value);
-      console.log(mySet1);
     }
-    return mySet1;
   }
+  return mySet1;
   // Перебираємо множину за допомогою 'for of'. Цикл 'for of' дозволяє пройтись по всіх елементах колекції.
   // Для кожного елемента перевіряємо, чи є цей елемент числом за допомогою оператора typeof
   // Якщо елемент є числом, то видаляємо його з множини за допомогою метода delete
@@ -160,6 +160,17 @@ console.log(setToArray(new Set([1, 2, 3, "b", "a", "c"])));
  * arr - Масив, з якого потрібно видалити дублікати.
  */
 function removeDuplicatesInPlace(arr) {
+  let set1 = new Set();
+  for (let i = 0; i < arr.length; i++) {
+    if(arr[0] === arr[i]) {
+      delete arr[i];  
+    } 
+    if(arr[0] !== arr[i]) {
+      set1.add(i);
+      i = i - 1;
+    }
+  }
+  return set1;
   // Створення множини для збереження унікальних елементів
   // Перебір елементів масиву за допомогою циклу for від 0 до довжини масиву
   // Перевірка, чи елемент вже присутній у множині
@@ -184,6 +195,13 @@ console.log(removeDuplicatesInPlace([1, 2, 2, 3, 3, 4, 5, 5]));
  * Повертаємо - true, якщо множини не мають спільних елементів, інакше false.
  */
 function areDisjoint(set1, set2) {
+  for (const value of set1) {
+    if(set1.has(set2) === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   // Перебираємо першу множину за допомогою оператору for of
   // Якщо знайдено спільний елемент з другою множиною,використовуємо метод has, повертаємо false
   //Якщо немає  спільних елементів повертаємо true
@@ -203,6 +221,13 @@ console.log(areDisjoint(new Set([1, 2, 3]), new Set([3, 4, 5])));
  * Повертаємо - Множина з елементами, що належать set1, але не належать set2.
  */
 function getDifference(set1, set2) {
+  let differenceSet = new Set();
+  for (const value of set1) {
+    if(set2.has(value) === false) {
+      differenceSet.add(value);
+    }
+  }
+  return differenceSet;
   // Створення множини differenceSet
   // Перебір елементів першої множини за допомогою оператору for of
   // Якщо елемент не належить другій множині, додаємо його до differenceSet
@@ -224,8 +249,16 @@ console.log(getDifference(new Set([1, 2, 3, 4]), new Set([2, 3])));
  */
 function getIntersection(arr1, arr2) {
   // Створення множин з двох масивів
+  let set1 = new Set(arr1);
+  let set2 = new Set(arr2);
   // Створення множини intersectionSet
+  let intersectionSet = new Set();
   // Перебір елементів першої множини за допомогою оператору for of
+    for (const value of set1) {
+      if(set2.has(value))
+      intersectionSet.add(value);
+  }
+  return intersectionSet;
   // Перевірка, чи елемент є спільним у другій множині
   // Додавання спільного елементу до множини intersectionSet
   // Повертаємо множину intersectionSet
@@ -244,7 +277,22 @@ console.log(getIntersection([1, 2, 3, 4], [3, 4, 5, 6]));
  */
 function iterateSet(set) {
   // Використовуємо методу keys для отримання ітератора ключів
+  const iterateSet = set.keys();
   // Використовуємо for...of для кожного ключа з ітератора keys
+  for (const value of set) {
+    console.log(value);
+  }
+    
+  
+    const iterateSet2 = set.values();
+    for (const value of set) {
+      console.log(value);
+    }
+
+    const iterateSet3 = set.entries();
+    for (const value of iterateSet3) {
+      console.log(value);
+    }
   // Виведення ключа у консоль
   // Використовуємо методу values для отримання ітератора значень
   // Використовуємо for...of для кожного значення з ітератора values
@@ -277,10 +325,19 @@ iterateSet(new Set(["a", "b", "c"]));
  */
 function sumNumbers(set) {
   // Використання методу forEach для перебору елементів множини
+  let sum = 0;
+  let set1 = new Set();
+  set.forEach((element) => { 
+    if(typeof element === "number") {
+      set1.add(element);
+      sum = sum + element;
+  }
+  });
+  return sum;
   // Перевірка, чи є елемент числом
   // Додавання числового елемента до суми
   // Повертаємо суму
-  return sum;
+  
 }
 
 // Приклад використання функції sumNumbers
