@@ -163,13 +163,11 @@ console.log(setToArray(new Set([1, 2, 3, "b", "a", "c"])));
 function removeDuplicatesInPlace(arr) {
   let set1 = new Set();
   for (let i = 0; i < arr.length; i++) {
-    if(arr[0] === arr[i]) {
-      delete arr[i]; 
+    if(set1.has(arr[i])) {
+      arr.splice(i, 1) 
       i = i - 1;
-    }
-   
-    if(arr[0] !== arr[i]) {
-      set1.add(i);
+    } else {
+      set1.add(arr[i]);
     }
   }
   return set1;
