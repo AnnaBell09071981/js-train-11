@@ -33,8 +33,9 @@ console.log(customSet([1, "a", 2, "b", 3, "c"]));
  * set - Множина, яку потрібно очистити.
  */
 function clearSet(set) {
+  if(set.size < 0) {
   set.clear();
-  console.log(set.size);
+}
   return "Множину очищено";
   // Використання властивості size для перевірки розміру множини, чи більше вона нуля
   // Якщо так використання методу clear для очищення множини та повертаємо Множину очищено.
@@ -163,11 +164,12 @@ function removeDuplicatesInPlace(arr) {
   let set1 = new Set();
   for (let i = 0; i < arr.length; i++) {
     if(arr[0] === arr[i]) {
-      delete arr[i];  
-    } 
+      delete arr[i]; 
+      i = i - 1;
+    }
+   
     if(arr[0] !== arr[i]) {
       set1.add(i);
-      i = i - 1;
     }
   }
   return set1;
